@@ -1,5 +1,5 @@
 steps:
-  - name: gcr.io/searce-playground/cloud-build@sha256:d7cf7838a81f483c6d5d86cd3a6f4c144e3d43047769054548f001e43a4142cc
+  - name: gcloud
   - id: list instances
   - args:
       - compute
