@@ -5,7 +5,7 @@ steps:
       - compute
       - instances
       - list
-      - -- PROJECT = searce-playground
+      - -- PROJECT=searce-playground
 
 # steps:
 #   - name: gcr.io/cloud-builders/gcloud
