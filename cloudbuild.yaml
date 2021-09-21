@@ -1,12 +1,11 @@
 steps:
-  - name: gcr.io/cloud-builders/gcloud
+  - name: gcr.io/searce-playground/cloud-build
   - id: list instances
   - args:
       - compute
       - instances
       - list
       - -- PROJECT=searce-playground
-
 # steps:
 #   - name: gcr.io/cloud-builders/gcloud
 #   - id: create image
