@@ -11,11 +11,48 @@ steps:
       - compute
       - images
       - create
-      - new-image-rahul-12
+      - new-image-rahul-14
       - '--source-disk=rahulprajapati-instance-1'
       - '--source-disk-zone=asia-east1-b'
       - '--project=searce-playground'
     id: create image
+    
+    
+   - name: gcr.io/cloud-builders/gcloud
+     id: create instance template
+     args:
+     - compute 
+     - --project=searce-playground
+     - instance-templates 
+     - create 
+     - mig-template-launch-178
+     - --machine-type=e2-micro
+     - --subnet=projects/searce-playground/regions/asia-east1/subnetworks/rahulprajapati-subnet-1
+     - --no-address 
+     - --maintenance-policy=MIGRATE 
+     - --service-account=rahulprajapati-mig-pipeline-ac@searce-playground.iam.gserviceaccount.com
+     - --scopes=https://www.googleapis.com/auth/cloud-platform 
+     - --region=asia-east1
+     - --tags=http-server,https-server
+     - --image=new-image-rahul-14
+     - --image-project=searce-playground
+     - --boot-disk-size=30GB 
+     - --boot-disk-type=pd-balanced 
+     - --boot-disk-device-name=mig-template-launch-178
+     - --no-shielded-secure-boot 
+     - --shielded-vtpm 
+     - --shielded-integrity-monitoring 
+     - --reservation-affinity=any
+
+
+
+
+
+
+
+
+
+
 
 # steps:
 #   - name: gcr.io/cloud-builders/gcloud
