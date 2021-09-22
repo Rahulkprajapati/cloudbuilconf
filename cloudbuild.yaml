@@ -52,7 +52,7 @@ steps:
     - managed 
     - rolling-action 
     - start-update 
-    - mih-rahul-jenkis-testing 
+    - mih-rahul-jenkins-testing 
     - --version=template=mig-template-launch-179
     - --type=proactive 
     - --zone=asia-east1-b
