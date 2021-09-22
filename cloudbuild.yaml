@@ -11,7 +11,7 @@ steps:
       - compute
       - images
       - create
-      - new-image-rahul-14
+      - new-image-rahul-17
       - '--source-disk=rahulprajapati-instance-1'
       - '--source-disk-zone=asia-east1-b'
       - '--project=searce-playground'
@@ -25,7 +25,7 @@ steps:
      - --project=searce-playground
      - instance-templates 
      - create 
-     - mig-template-launch-178
+     - mig-template-launch-179
      - --machine-type=e2-micro
      - --subnet=projects/searce-playground/regions/asia-east1/subnetworks/rahulprajapati-subnet-1
      - --no-address 
@@ -34,17 +34,29 @@ steps:
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
      - --region=asia-east1
      - --tags=http-server,https-server
-     - --image=new-image-rahul-14
+     - --image=new-image-rahul-17
      - --image-project=searce-playground
      - --boot-disk-size=30GB 
      - --boot-disk-type=pd-balanced 
-     - --boot-disk-device-name=mig-template-launch-178
+     - --boot-disk-device-name=mig-template-launch-179
      - --no-shielded-secure-boot 
      - --shielded-vtpm 
      - --shielded-integrity-monitoring 
      - --reservation-affinity=any
 
-
+  - name: gcr.io/cloud-builders/gcloud
+  - id: update instance template
+  - args:
+    - compute 
+    - instance-groups 
+    - managed 
+    - rolling-action 
+    - start-update 
+    - mih-rahul-jenkis-testing 
+    - --version=template=mig-template-launch-179
+    - --type=proactive 
+    - --zone=asia-east1 
+    - --project=searce-playground'
 
 
 
