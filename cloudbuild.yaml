@@ -2,19 +2,12 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     args:
       - compute
-      - instances
-      - list
-      - '-- project=searce-playground'
-    id: list instances
-  - name: gcr.io/cloud-builders/gcloud
-    args:
-      - compute
       - images
       - create
-      - new-image-rahul-77
-      - '--source-disk=rahulprajapati-instance-1'
-      - '--source-disk-zone=asia-east1-b'
-      - '--project=searce-playground'
+      - ${_IMAGE_NAME}
+      - '--source-disk=${_GCE_INSTANCE__NAME}'
+      - '--source-disk-zone=${_ZONE}'
+      - '--project=${_PROJECT}'
     id: create image
     
     
@@ -22,23 +15,23 @@ steps:
     id: create instance template
     args:
      - compute 
-     - --project=searce-playground
+     - --project=${_PROJECT_ID}
      - instance-templates 
      - create 
-     - mig-template-launch-77
-     - --machine-type=e2-micro
-     - --subnet=projects/searce-playground/regions/asia-east1/subnetworks/rahulprajapati-subnet-1
+     - ${_INSTANCE_TEMPLATE_NAME}
+     - --machine-type=${_MACHINE_TYPE}
+     - --subnet=projects/${_PROJECT_ID}/regions/${_REGION}/subnetworks/${_SUBNETWORK}
      - --no-address 
      - --maintenance-policy=MIGRATE 
-     - --service-account=rahulprajapati-mig-pipeline-ac@searce-playground.iam.gserviceaccount.com
+     - --service-account=${_SERVICE_ACCOUNT}
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
-     - --region=asia-east1
-     - --tags=http-server,https-server
-     - --image=new-image-rahul-77
-     - --image-project=searce-playground
+     - --region=${_REGION}
+     - --tags=${_TAGS}
+     - --image=${_IMAGE_NAME}
+     - --image-project=${_IMAGE_PROJECT_ID}
      - --boot-disk-size=30GB 
      - --boot-disk-type=pd-balanced 
-     - --boot-disk-device-name=mig-template-launch-77
+     - --boot-disk-device-name=${_INSTANCE_TEMPLATE_NAME}
      - --no-shielded-secure-boot 
      - --shielded-vtpm 
      - --shielded-integrity-monitoring 
@@ -52,87 +45,23 @@ steps:
     - managed 
     - rolling-action 
     - start-update 
-    - mig-rahul-jenkins-testing 
-    - --version=template=mig-template-launch-77
+    - ${_MIG_NAME}
+    - --version=template=${_INSTANCE_TEMPLATE_NAME}
     - --type=proactive 
-    - --zone=asia-east1-b
-    - --project=searce-playground
+    - --zone=${_ZONE}
+    - --project=${_PROJECT_ID}
 
-
-
-
-
-
-
-# steps:
-#   - name: gcr.io/cloud-builders/gcloud
-#   - id: create image
-#   - args:
-#     - compute 
-#     - images 
-#     - create 
-#     - IMAGE_NAME 
-#     - --source-disk=GCE_INSTANCE_NAME
-#     - --source-disk-zone=ZONE --project PROJECT'
-#     env:
-#       - 'IMAGE_NAME = mig-update-image'              
-#       - 'GCE_INSTANCE_NAME = rahulprajapati-instance-1'            
-#       - 'ZONE = asia-east1-b'                           
-#       - 'PROJECT = searce-playground' 
-
-#   - name: gcr.io/cloud-builders/gcloud
-#   - id: create instance template
-
-#   - args:
-#     - compute -
-#     - -project=PROJECT_ID 
-#     - instance-templates 
-#     - create 
-#     - INSTANCE_TEMPLATE_NAME 
-#     - --machine-type=MACHINE_TYPE 
-#     - --subnet=projects/PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK 
-#     - --no-address 
-#     - --maintenance-policy=MIGRATE 
-#     - --service-account=SERVICE_ACCOUNT 
-#     - --scopes=https://www.googleapis.com/auth/cloud-platform 
-#     - --region=REGION 
-#     - --tags=TAGS 
-#     - --image=IMAGE_NAME 
-#     - --image-project=IMAGE_PROJECT_ID 
-#     - --boot-disk-size=30GB 
-#     - --boot-disk-type=pd-balanced 
-#     - --boot-disk-device-name=INSTANCE_TEMPLATE_NAME 
-#     - --no-shielded-secure-boot 
-#     - --shielded-vtpm 
-#     - --shielded-integrity-monitoring 
-#     - --reservation-affinity=any'
-#     env:
-#       - 'PROJECT = searce-playground'
-#       - 'INSTANCE_TEMPLATE_NAME = mig-template-launch'
-#       - 'MACHINE_TYPE = e2-micro'
-#       - 'SUBNETWORK = rahulprajapati-subnet-1'                   
-#       - 'REGION = asia-east1'
-#       - 'SERVICE_ACCOUNT = rahulprajapati-mig-pipeline-ac@searce-playground.iam.gserviceaccount.com'
-#       - 'TAGS = http-server,https-server'
-#       - 'IMAGE_NAME = mig-update-image'  
-#       - 'IMAGE_PROJECT_ID = searce-playground'
-
-
-#   - name: gcr.io/cloud-builders/gcloud
-#   - id: update instance template
-#   - args:
-#     - compute 
-#     - instance-groups 
-#     - managed 
-#     - rolling-action 
-#     - start-update 
-#     - MIG_NAME 
-#     - --version=template=INSTANCE_TEMPLATE_NAME 
-#     - --type=proactive 
-#     - --zone=ZONE 
-#     - --project=PROJECT_ID'
-#     env:
-#       - 'MIG_NAME = mig-rahul-jenkins-testing'
-#       - 'INSTANCE_TEMPLATE_NAME = mig-template-launch'
-#       - 'ZONE = sia-east1-b'
-#       - 'PROJECT_ID = searce-playground'
+substitutions:
+    _IMAGE_NAME: mig-update-image11
+    _GCE_INSTANCE__NAME: rahulprajapati-instance-1
+    _ZONE: asia-east1-b
+    _PROJECT: searce-playground
+    _PROJECT_ID: searce-playground
+    _INSTANCE_TEMPLATE_NAME: mig-template-launch11
+    _MACHINE_TYPE: e2-micro
+    _SUBNETWORK: rahulprajapati-subnet-1
+    _REGION: asia-east1
+    _SERVICE_ACCOUNT: rahulprajapati-mig-pipeline-ac@searce-playground.iam.gserviceaccount.com
+    _TAGS: http-server,https-server
+    _IMAGE_PROJECT_ID: searce-playground
+    _MIG_NAME: mig-rahul-jenkins-testing
