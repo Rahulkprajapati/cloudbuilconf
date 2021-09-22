@@ -45,8 +45,8 @@ steps:
      - --reservation-affinity=any
 
   - name: gcr.io/cloud-builders/gcloud
-  - id: update instance template
-  - args:
+    id: update instance template
+    args:
     - compute 
     - instance-groups 
     - managed 
@@ -57,8 +57,6 @@ steps:
     - --type=proactive 
     - --zone=asia-east1 
     - --project=searce-playground'
-
-
 
 
 
