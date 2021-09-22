@@ -1,11 +1,22 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
-  - id: list instances
-  - args:
+    args:
       - compute
       - instances
       - list
-      - -- project=searce-playground
+      - '-- project=searce-playground'
+    id: list instances
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - compute
+      - images
+      - create
+      - new-image-rahul
+      - '--source-disk=rahulprajapati-instance-1'
+      - '--source-disk-zone=asia-east1-b'
+      - '--project=searce-playground'
+    id: create image
+
 # steps:
 #   - name: gcr.io/cloud-builders/gcloud
 #   - id: create image
