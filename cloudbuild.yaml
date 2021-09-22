@@ -4,7 +4,7 @@ steps:
       - compute
       - images
       - create
-      - ${_IMAGE_NAME}
+      - ${_IMAGE_NAME}-${_BUILD}
       - '--source-disk=${_GCE_INSTANCE__NAME}'
       - '--source-disk-zone=${_ZONE}'
       - '--project=${_PROJECT}'
@@ -18,7 +18,7 @@ steps:
      - --project=${_PROJECT_ID}
      - instance-templates 
      - create 
-     - ${_INSTANCE_TEMPLATE_NAME}
+     - ${_INSTANCE_TEMPLATE_NAME}-${_BUILD}
      - --machine-type=${_MACHINE_TYPE}
      - --subnet=projects/${_PROJECT_ID}/regions/${_REGION}/subnetworks/${_SUBNETWORK}
      - --no-address 
@@ -27,11 +27,11 @@ steps:
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
      - --region=${_REGION}
      - --tags=${_TAGS}
-     - --image=${_IMAGE_NAME}
+     - --image=${_IMAGE_NAME}-${_BUILD}
      - --image-project=${_IMAGE_PROJECT_ID}
      - --boot-disk-size=30GB 
      - --boot-disk-type=pd-balanced 
-     - --boot-disk-device-name=${_INSTANCE_TEMPLATE_NAME}
+     - --boot-disk-device-name=${_INSTANCE_TEMPLATE_NAME}-${_BUILD}
      - --no-shielded-secure-boot 
      - --shielded-vtpm 
      - --shielded-integrity-monitoring 
@@ -46,12 +46,13 @@ steps:
     - rolling-action 
     - start-update 
     - ${_MIG_NAME}
-    - --version=template=${_INSTANCE_TEMPLATE_NAME}
+    - --version=template=${_INSTANCE_TEMPLATE_NAME}-${_BUILD}
     - --type=proactive 
     - --zone=${_ZONE}
     - --project=${_PROJECT_ID}
 
 substitutions:
+    _BUILD: $BUILD_ID
     _IMAGE_NAME: mig-update-image11
     _GCE_INSTANCE__NAME: rahulprajapati-instance-1
     _ZONE: asia-east1-b
