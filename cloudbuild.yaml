@@ -18,9 +18,9 @@ steps:
     id: create image
     
     
-   - name: gcr.io/cloud-builders/gcloud
-     id: create instance template
-     args:
+  - name: gcr.io/cloud-builders/gcloud
+    id: create instance template
+    args:
      - compute 
      - --project=searce-playground
      - instance-templates 
