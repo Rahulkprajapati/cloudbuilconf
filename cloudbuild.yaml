@@ -11,7 +11,7 @@ steps:
       - compute
       - images
       - create
-      - new-image-rahul-17
+      - new-image-rahul-77
       - '--source-disk=rahulprajapati-instance-1'
       - '--source-disk-zone=asia-east1-b'
       - '--project=searce-playground'
@@ -25,7 +25,7 @@ steps:
      - --project=searce-playground
      - instance-templates 
      - create 
-     - mig-template-launch-179
+     - mig-template-launch-77
      - --machine-type=e2-micro
      - --subnet=projects/searce-playground/regions/asia-east1/subnetworks/rahulprajapati-subnet-1
      - --no-address 
@@ -34,11 +34,11 @@ steps:
      - --scopes=https://www.googleapis.com/auth/cloud-platform 
      - --region=asia-east1
      - --tags=http-server,https-server
-     - --image=new-image-rahul-17
+     - --image=new-image-rahul-77
      - --image-project=searce-playground
      - --boot-disk-size=30GB 
      - --boot-disk-type=pd-balanced 
-     - --boot-disk-device-name=mig-template-launch-179
+     - --boot-disk-device-name=mig-template-launch-77
      - --no-shielded-secure-boot 
      - --shielded-vtpm 
      - --shielded-integrity-monitoring 
@@ -52,8 +52,8 @@ steps:
     - managed 
     - rolling-action 
     - start-update 
-    - mih-rahul-jenkins-testing 
-    - --version=template=mig-template-launch-179
+    - mig-rahul-jenkins-testing 
+    - --version=template=mig-template-launch-77
     - --type=proactive 
     - --zone=asia-east1-b
     - --project=searce-playground
