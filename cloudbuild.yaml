@@ -11,7 +11,7 @@ steps:
       - compute
       - images
       - create
-      - new-image-rahul
+      - new-image-rahul-12
       - '--source-disk=rahulprajapati-instance-1'
       - '--source-disk-zone=asia-east1-b'
       - '--project=searce-playground'
