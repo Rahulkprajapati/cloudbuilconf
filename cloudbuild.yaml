@@ -56,7 +56,7 @@ steps:
     - --version=template=mig-template-launch-179
     - --type=proactive 
     - --zone=asia-east1 
-    - --project=searce-playground'
+    - --project=searce-playground
 
 
 
