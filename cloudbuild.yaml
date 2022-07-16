@@ -56,13 +56,13 @@ substitutions:
     _IMAGE_NAME: mig-update-image11
     _GCE_INSTANCE__NAME: rahulprajapati-instance-1
     _ZONE: asia-east1-b
-    _PROJECT: searce-playground
-    _PROJECT_ID: searce-playground
+    _PROJECT: strudy-playground
+    _PROJECT_ID: strudy-playground
     _INSTANCE_TEMPLATE_NAME: mig-template-launch11
     _MACHINE_TYPE: e2-micro
     _SUBNETWORK: rahulprajapati-subnet-1
     _REGION: asia-east1
-    _SERVICE_ACCOUNT: rahulprajapati-mig-pipeline-ac@searce-playground.iam.gserviceaccount.com
+    _SERVICE_ACCOUNT: rahulprajapati-mig-pipeline-ac@strudy-playground.iam.gserviceaccount.com
     _TAGS: http-server,https-server
-    _IMAGE_PROJECT_ID: searce-playground
+    _IMAGE_PROJECT_ID: strudy-playground
     _MIG_NAME: mig-rahul-jenkins-testing
